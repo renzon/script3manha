@@ -61,3 +61,6 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+
+backend/appengine/apps
+backend/appengine/lib

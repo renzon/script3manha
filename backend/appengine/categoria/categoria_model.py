@@ -5,6 +5,7 @@ from google.appengine.ext import ndb
 
 class Categoria(ndb.Model):
     nome=ndb.StringProperty(required=True)
+    quantidade=  ndb.IntegerProperty(required=True)
 
     @classmethod
     def query_ordenada_por_nome(cls):

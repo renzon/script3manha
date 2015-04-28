@@ -4,12 +4,14 @@ from google.appengine.ext import ndb
 from categoria.categoria_model import Categoria
 from config.template_middleware import TemplateResponse
 from gaecookie.decorator import no_csrf
+from gaepermission.decorator import login_required, permissions
+from permission_app.model import ADMIN, MANAGER
 from routes.categorias import edit
 from routes.categorias.new import salvar
 from tekton.gae.middleware.redirect import RedirectResponse
 from tekton.router import to_path
 
-
+@permissions(ADMIN, MANAGER)
 @no_csrf
 def index():
     query = Categoria.query_ordenada_por_nome()

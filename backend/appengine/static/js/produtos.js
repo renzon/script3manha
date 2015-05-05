@@ -52,13 +52,14 @@ var parabolaDerivada=derivar(parabola);
 console.log(parabolaDerivada(1));
 console.log(parabolaDerivada(2));
 
-var obj = {'a': 1, b: ['Renzo', 'Nuccitelli'], 1:{}};
+var obj = {'a': 1, b: ['Renzo', 'Nuccitelli'], 1:{}, f: function(){ return 8}};
 
 console.log(obj);
 console.log(obj.a);
 console.log(obj.b);
 console.log(obj[1]);
 console.log(obj['b']);
+console.log(obj.f());
 
 
 //var retaTransladada=derivar(reta);

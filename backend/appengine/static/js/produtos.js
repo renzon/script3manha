@@ -1,68 +1,23 @@
-var olaMundo = function olaMundo(){
-  console.log('Olá Mundo');
+$(document).ready(function(){
+  var $busca = $('#busca');
+  var $chatTxt = $('#chat-txt');
+  var $chatUl = $('#chat-ul');
+  $('#jq').click(function(){
+    $busca.slideToggle();
+  });
 
-}
+  $('#jq2').click(function(){
+    $busca.empty();
+  });
 
-olaMundo();
+  $('#chat-btn').click(function(){
+    var msg = $chatTxt.val();
+    $chatTxt.val('');
 
-var outro= olaMundo;
-
-outro();
-
-olaMundo= 'blah';
-
-outro();
-
-console.log(olaMundo);
-
-function executadorDeFuncao(fcn){
-  fcn('Executador de funcao');
-}
-
-function blah1(str){
-  console.log(str+' blah1');
-}
-
-function blah2(str){
-  console.log(str+' blah2');
-}
-
-executadorDeFuncao(blah1);
-executadorDeFuncao(blah2);
-
-function derivar(fcn){
-  var deltax=0.0000000001;
-  function derivada(x){
-    return (fcn(x+deltax)-fcn(x))/deltax;
-  }
-
-  return derivada;
-}
-
-function reta(x){
-  return x;
-}
-
-function parabola(x){
-  return x*x;
-}
-
-var parabolaDerivada=derivar(parabola);
-
-console.log(parabolaDerivada(1));
-console.log(parabolaDerivada(2));
-
-var obj = {'a': 1, b: ['Renzo', 'Nuccitelli'], 1:{}, f: function(){ return 8}};
-
-console.log(obj);
-console.log(obj.a);
-console.log(obj.b);
-console.log(obj[1]);
-console.log(obj['b']);
-console.log(obj.f());
-
-
-//var retaTransladada=derivar(reta);
-//
-//console.log(retaTransladada(1));
-//console.log(retaTransladada(2));
+    var li='<li>'+msg+'</li>'
+    $chatUl.fadeOut({duration: 400, 'complete':function(){
+      $chatUl.fadeIn(500);
+    }});
+    $chatUl.prepend(li);
+  });
+});

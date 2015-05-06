@@ -3,58 +3,53 @@
   <script type="application/javascript" src="/static/js/produtos.js"></script>
 {% endblock %}
 {% block body %}
-<div class="container">
-   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
         <div class="well">
-        <h2> Formulário de Produto</h2>
-        <form action="{{ salvar_path }}" method="post">
-        <select name="categoria">
+          <h2> Formulário de Produto</h2>
+
+
+          <select id="categoria-input" name="categoria">
             {% for cat in categorias %}
-            <option value="{{ cat.key.id() }}">{{ cat.nome }}</option>
+              <option value="{{ cat.key.id() }}">{{ cat.nome }}</option>
             {% endfor %}
 
-</select>
-        {{ csrf_input() }}
-        {{ form_input('Nome','nome','','') }}
-        {{ form_input('Preço','preco','','') }}
-        <button class="btn btn-success" type="submit">Salvar</button>
+          </select>
+          {{ csrf_input() }}
+          {{ form_input('Nome','nome','','') }}
+          {{ form_input('Preço','preco','','') }}
+          <button id="salvar-btn" class="btn btn-success" type="button">Salvar</button>
+            <img id="ajax-save-gif" src="/static/img/ajax.gif" />
 
-        </form>
 
-        <button id="jq" class="click">Esconder/Mostrar</button>
-        <button id="jq2" class="click">Remover Busca</button>
-        <input type="text" id="chat-txt" />
-        <button id="chat-btn" class="click">Enviar</button>
-        <ul id="chat-ul">
+          <div id="busca">
+            <h3>Lista de Produtos {{ 'da categoria '+categoria_selecionada.nome if categoria_selecionada }} </h3>
 
-        </ul>
-        <div id="busca">
-          <h3>Lista de Produtos {{ 'da categoria '+categoria_selecionada.nome if categoria_selecionada }} </h3>
+            <form action="{{ pesquisa_path }}">
+              <select name="categoria_selecionada">
+                {% for cat in categorias %}
+                  <option
+                      value="{{ cat.key.id() }}" {{ 'selected="selected"' | safe if cat == categoria_selecionada }}>{{ cat.nome }}</option>
+                {% endfor %}
 
-          <form action="{{ pesquisa_path }}">
-            <select name="categoria_selecionada">
-              {% for cat in categorias %}
-                <option
-                    value="{{ cat.key.id() }}" {{ 'selected="selected"' | safe if cat == categoria_selecionada }}>{{ cat.nome }}</option>
+              </select>
+              <button type="submit" class="btn btn-success">Pesquisar</button>
+
+
+            </form>
+            <ul>
+              {% for prod in produtos %}
+                <li>{{ prod.nome }} - {{ prod.preco }}</li>
               {% endfor %}
 
-            </select>
-            <button type="submit" class="btn btn-success">Pesquisar</button>
-
-          </form>
-          <ul>
-            {% for prod in produtos %}
-              <li>{{ prod.nome }} - {{ prod.preco }}</li>
-            {% endfor %}
-
-          </ul>
+            </ul>
+          </div>
         </div>
-</div>
 
+      </div>
     </div>
-   </div>
-</div>
+  </div>
 
 
 {% endblock %}

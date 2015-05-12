@@ -4,6 +4,20 @@ $(document).ready(function () {
   var $precoInput = $('#preco-input');
   var $nomeInput = $('#nome-input');
   var $categoriaInput = $('#categoria-input');
+  var $produtosUl = $('#produtos-ul');
+
+  function adicionarProduto(produto){
+    var li='<li><button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>';
+    li=li+produto.nome +' - '+produto.preco +'</li>';
+    $produtosUl.append(li);
+  }
+
+  $.get('/produtos/rest/listar',function(produtos){
+    $.each(produtos, function(index, p){
+      adicionarProduto(p);
+    });
+  });
+
 
   function obterInputsDeProduto() {
     return {
@@ -23,6 +37,7 @@ $(document).ready(function () {
         obterInputsDeProduto(),
         function (produto) {
           $('input[type="text"]').val('');
+          adicionarProduto(produto);
         }).error(function(erro){
           for (propriedade in erro.responseJSON){
             $('#'+propriedade+'-div').addClass('has-error');
